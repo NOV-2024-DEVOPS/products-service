@@ -52,7 +52,7 @@ jobs:
     - name: Cache SonarCloud analysis tools
       uses: SonarSource/sonarcloud-github-action@v2
       with:
-        sonar-token: "89162795be33082944a3ede379c46ca140a69059"
+        sonar-token: "a1e3979abfeb689ad36fdb87a93fa5c0d8b5ead5"
 
     - name: Run SonarCloud analysis
       run: |
