@@ -3,8 +3,8 @@
 	"name": "testing",
 	"values": [
 		{
-            "key": "https://j0uqlrmxhk.execute-api.us-east-1.amazonaws.com",
-            "value": "https://j0uqlrmxhk.execute-api.us-east-1.amazonaws.com/products",
+            "key": "API_BASE_URL",
+            "value": "https://j0uqlrmxhk.execute-api.us-east-1.amazonaws.com",
 			"type": "default",
 			"enabled": true
 		}
