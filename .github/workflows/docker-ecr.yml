@@ -46,16 +46,17 @@ jobs:
       - name: Set up SonarCloud
         uses: sonarsource/sonarcloud-github-action@v2
         with:
-          SONAR_TOKEN: "89162795be33082944a3ede379c46ca140a69059"
+          SONAR_TOKEN: "89162795be33082944a3ede379c46ca140a69059"  # Referencia al secreto de GitHub
 
       # Ejecutar análisis de SonarCloud para el proyecto Java
       - name: SonarCloud Analysis
         run: |
           mvn clean verify sonar:sonar \
-            -Dsonar.projectKey=NOV-2024-DEVOPS_products-service\
+            -Dsonar.projectKey=NOV-2024-DEVOPS_products-service \
             -Dsonar.organization=nov-2024-devops \
             -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=${SONAR_TOKEN}
+            -Dsonar.login=$SONAR_TOKEN \
+            -Dsonar.sources=src
 
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
