@@ -46,6 +46,8 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '17'
+        distribution: 'temurin'  # Agregar esta línea
+        check-latest: false
 
     - name: Cache SonarCloud analysis tools
       uses: SonarSource/sonarcloud-github-action@v2
