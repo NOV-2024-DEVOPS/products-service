@@ -73,7 +73,7 @@ jobs:
 
     - name: Run Postman tests
       run: |
-        newman run "./collection.json" \
+        newman run "collection.json" \
           --environment "./environment.json \
           --delay-request 100 \
           --reporters cli,html \
