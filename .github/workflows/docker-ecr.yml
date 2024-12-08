@@ -46,7 +46,7 @@ jobs:
       - name: Set up SonarCloud
         uses: sonarsource/sonarcloud-github-action@v2
         with:
-          SONAR_TOKEN: "89162795be33082944a3ede379c46ca140a69059"  # Referencia al secreto de GitHub
+          sonar-token: "89162795be33082944a3ede379c46ca140a69059"  # Referencia al secreto de GitHub
 
       # Ejecutar análisis de SonarCloud para el proyecto Java
       - name: SonarCloud Analysis
