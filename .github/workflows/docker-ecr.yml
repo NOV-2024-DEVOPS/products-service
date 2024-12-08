@@ -46,24 +46,30 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '17'
-        distribution: 'temurin'  # Agregar esta línea
-        check-latest: false
+        distribution: 'temurin'
 
     - name: Cache SonarCloud analysis tools
-      uses: SonarSource/sonarcloud-github-action@v2
+      uses: actions/cache@v4
       with:
-        sonar-token: "a1e3979abfeb689ad36fdb87a93fa5c0d8b5ead5"
+        path: ~/.sonar/cache
+        key: ${{ runner.os }}-sonar
+        restore-keys: ${{ runner.os }}-sonar
 
-    - name: Run SonarCloud analysis
-      run: |
-        ./mvnw clean verify sonar:sonar \
-          -Dsonar.projectKey=NOV-2024-DEVOPS_products-service \
-          -Dsonar.organization=nov-2024-devops \
-          -Dsonar.host.url=https://sonarcloud.io
+    - name: Cache Maven packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+
+    - name: Build and analyze with SonarCloud
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=NOV-2024-DEVOPS_products-service -Dsonar.organization=nov-2024-devops -Dsonar.host.url=https://sonarcloud.io
 
     - name: Log in to Amazon ECR
       uses: aws-actions/amazon-ecr-login@v2
-    
+
     - name: Build, Tag, and Push Docker Image
       env:
         ECR_REPOSITORY: ${{ env.ECR_REPOSITORY }}
