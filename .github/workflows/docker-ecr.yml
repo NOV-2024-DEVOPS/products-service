@@ -67,6 +67,18 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=NOV-2024-DEVOPS_products-service -Dsonar.organization=nov-2024-devops -Dsonar.host.url=https://sonarcloud.io
 
+    # Instalar Newman y ejecutar pruebas de Postman
+    - name: Install Newman
+      run: npm install -g newman
+
+    - name: Run Postman tests
+      run: |
+        newman run "./collection.json" \
+          --environment "./environment.json \
+          --delay-request 100 \
+          --reporters cli,html \
+          --reporter-html-export newman-report.html
+
     - name: Log in to Amazon ECR
       uses: aws-actions/amazon-ecr-login@v2
 
