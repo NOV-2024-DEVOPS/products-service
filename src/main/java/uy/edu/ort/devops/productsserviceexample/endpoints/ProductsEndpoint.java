@@ -36,7 +36,7 @@ public class ProductsEndpoint {
         }
     }
 
-    // Nuevo endpoint /health
+    // Nuevo endpoint /health test
     @GetMapping("/health")
     public ResponseEntity<String> health() {
             return ResponseEntity.ok("Healthy");
